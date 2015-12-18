@@ -11,7 +11,7 @@ Add VCS root, import gradle projects, and configure GWT when prompted by Intelli
 ## Running
 
 See [Running your project](https://github.com/libgdx/libgdx/wiki/Gradle-and-Intellij-IDEA#running-your-project) for more details.
-Run via gradle, with <code>gradlew</code> for Linux/OSX, and </code>gradlew.bat</code> for Windows.
+Run via gradle, with <code>gradlew</code> for Linux/OSX, and <code>gradlew.bat</code> for Windows.
 Use the terminal (<code>View > Tool Windows > Terminal</code>).
 Alternatively use the Gradle tool window in IntelliJ (<code>View > Tool Windows > Gradle</code>).
 
