@@ -7,13 +7,17 @@ import com.polarbirds.polarbird3d.MainGame;
 
 public class HtmlLauncher extends GwtApplication {
 
-        @Override
-        public GwtApplicationConfiguration getConfig () {
-                return new GwtApplicationConfiguration(480, 320);
-        }
+    @Override
+    public GwtApplicationConfiguration getConfig () {
+        final GwtApplicationConfiguration gwtApplicationConfiguration = new GwtApplicationConfiguration(480, 320);
+        gwtApplicationConfiguration.antialiasing = true;
+        gwtApplicationConfiguration.alpha = true;
 
-        @Override
-        public ApplicationListener getApplicationListener () {
-                return new MainGame();
-        }
+        return gwtApplicationConfiguration;
+    }
+
+    @Override
+    public ApplicationListener getApplicationListener () {
+        return new MainGame();
+    }
 }

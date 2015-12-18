@@ -18,5 +18,11 @@ Alternatively use the Gradle tool window in IntelliJ (<code>View > Tool Windows 
 To run the desktop version, use <code>gradlew desktop:run</code>.
 
 To run the html version, use <code>gradlew html:superDev</code>, 
-and open [localhost:8080/html](http://localhost:8080/html/) when it reports 91% done.
+and open [localhost:8080/html](http://localhost:8080/html/) when it reports:
+```
+The code server is ready.      
+Next, visit: http://localhost:9876/
+> Building 91% > :html:superDev
+```
+Ignore <code>91%</code> and <code>9876/</code>. It's really <code>100%</code> and <code>8080/html</code>. 
 Stop with <code>Ctrl+C</code>. 

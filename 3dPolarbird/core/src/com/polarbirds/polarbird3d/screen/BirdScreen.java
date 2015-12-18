@@ -1,10 +1,12 @@
 package com.polarbirds.polarbird3d.screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g3d.*;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 
@@ -13,7 +15,7 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class BirdScreen implements Screen {
 
-    public static final int MINIMUM_VIEWPORT_SIZE = 7; // Unit: blocks
+    public static final int MINIMUM_VIEWPORT_SIZE = 15; // Unit: blocks
 
     private PerspectiveCamera camera;
     private ModelBatch modelBatch;
@@ -22,35 +24,45 @@ public class BirdScreen implements Screen {
     private ModelInstance birdInstance;
     private ModelInstance floorInstance;
 
+    private final Vector3 cameraTarget = new Vector3();
+
     @Override
     public void show() {
-        camera = new PerspectiveCamera(67, 12, 7);
+        camera = new PerspectiveCamera(67, 25, 15);
         modelBatch = new ModelBatch();
 
-        camera.position.set(0, 5, 12);
-        camera.lookAt(Vector3.Zero);
+        cameraTarget.set(0, 7, 0);
+
+        camera.position.set(0, 10, 20);
+        camera.lookAt(cameraTarget);
         camera.update();
 
         ModelBuilder builder = new ModelBuilder();
 
-        Material floorMatierial = new Material(ColorAttribute.createDiffuse(0.1f, 0.1f, 0.1f, 1.f));
+        Material floorMaterial = new Material(ColorAttribute.createDiffuse(0.1f, 0.1f, 0.1f, 1.f));
 
-        Model floorModel = builder.createBox(12, 1, 12, floorMatierial,
+        Model floorModel = builder.createBox(12, 1, 12, floorMaterial,
                 VertexAttributes.Usage.Position
                         | VertexAttributes.Usage.ColorPacked
                         | VertexAttributes.Usage.Normal);
         floorInstance = new ModelInstance(floorModel, 0, 0, 0);
+
+        ObjLoader loader = new ObjLoader();
+
+        bird = loader.loadModel(Gdx.files.internal("model/bird.obj"));
+        birdInstance = new ModelInstance(bird);
     }
 
     @Override
     public void render(float delta) {
         camera.position.rotate(Vector3.Y, delta*36);
-        camera.lookAt(Vector3.Zero);
+        camera.lookAt(cameraTarget);
         camera.up.set(Vector3.Y);
         camera.update();
 
         modelBatch.begin(camera);
         modelBatch.render(floorInstance);
+        modelBatch.render(birdInstance);
         modelBatch.end();
     }
 
