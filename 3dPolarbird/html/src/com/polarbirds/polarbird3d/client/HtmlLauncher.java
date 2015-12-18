@@ -9,7 +9,7 @@ public class HtmlLauncher extends GwtApplication {
 
     @Override
     public GwtApplicationConfiguration getConfig () {
-        final GwtApplicationConfiguration gwtApplicationConfiguration = new GwtApplicationConfiguration(480, 320);
+        final GwtApplicationConfiguration gwtApplicationConfiguration = new GwtApplicationConfiguration(640, 480);
         gwtApplicationConfiguration.antialiasing = true;
         gwtApplicationConfiguration.alpha = true;
 
