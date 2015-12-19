@@ -26,3 +26,9 @@ Next, visit: http://localhost:9876/
 ```
 Ignore <code>91%</code> and <code>9876/</code>. It's really <code>100%</code> and <code>8080/html</code>. 
 Stop with <code>Ctrl+C</code>. 
+
+## Distributing
+
+See [Packaging for the web](https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline#packaging-for-the-web) for more details.
+To compile the html module, run <code>gradlew html:dist</code>. It may take 15 minutes to get past 80%.
+Then copy <code>html/build/dist/</code> to your web root (</code>/var/www/html/</code>).
