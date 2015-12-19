@@ -32,7 +32,7 @@ Stop with <code>Ctrl+C</code>.
 See [Packaging for the web](https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline#packaging-for-the-web) for more details.
 To compile the html module, run <code>gradlew html:dist</code>. It may take 15 minutes to get past 80%.
 Manyally remove the superDev-button, by removing the <code>a</code>-tag with javascript in it, inside <code>html/build/dist/index.html</code>.
-Then copy <code>html/build/dist/</code> to your web root (</code>/var/www/html/</code>).
+Then copy <code>html/build/dist/</code> to your web root (<code>/var/www/html/</code>).
 You may copy using scp:
 ```bash
 scp -r dist user@remote.server.com:/home/user/dist
