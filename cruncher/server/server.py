@@ -1,6 +1,5 @@
 import sqlite3
 from contextlib import closing
-import os
 
 from flask import Flask, jsonify, make_response, request, redirect
 from flask.globals import g
