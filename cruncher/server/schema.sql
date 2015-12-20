@@ -25,7 +25,7 @@ CREATE TABLE stat (
 
 CREATE TABLE player (
   email    TEXT PRIMARY KEY NOT NULL,
-  password TEXT             NOT NULL,
+  password TEXT             NOT NULL, -- Temporary!!
   name     TEXT             NOT NULL,
   joined   DATE             NOT NULL
 );
