@@ -1,2 +1,0 @@
-# Muncher
-Welcome to the project for the statistics and game tracker Muncher! This tracker is intended for use with the licensed board and card-game Munchkin by Steve Jackson Games. It is therefore open-source.
