@@ -1,9 +1,14 @@
+DROP TABLE IF EXISTS player_game;
+DROP TABLE IF EXISTS game_winners;
+DROP TABLE IF EXISTS gamedef_stat;
 DROP TABLE IF EXISTS gamematch;
+DROP TABLE IF EXISTS gamedef;
 DROP TABLE IF EXISTS player;
+DROP TABLE IF EXISTS stat;
 
 CREATE TABLE gamematch (
   id             INTEGER PRIMARY KEY AUTOINCREMENT,
-  FOREIGN KEY (gamedef_id) REFERENCES gamedef (id),
+  gamedef_id REFERENCES gamedef (id),
   timestarted    DATE NOT NULL,
   timeended      DATE NOT NULL,
   windescription TEXT NOT NULL
@@ -31,20 +36,17 @@ CREATE TABLE player (
 );
 
 CREATE TABLE gamedef_stat (
-  PRIMARY KEY (game_id, stat_id),
-  FOREIGN KEY (game_id) REFERENCES gamedef (id),
-  FOREIGN KEY (stat_id) REFERENCES stat (id),
+  game_id REFERENCES gamedef (id),
+  stat_id REFERENCES stat (id),
   value FLOAT NOT NULL
 );
 
-CREATE TABLE game_winnerrs (
-  PRIMARY KEY (winner_email, game_id),
-  FOREIGN KEY (winner_email) REFERENCES player (email),
-  FOREIGN KEY (game_id) REFERENCES gamematch (id)
+CREATE TABLE game_winners (
+  winner_email REFERENCES player (email),
+  game_id REFERENCES gamematch (id)
 );
 
 CREATE TABLE player_game (
-  PRIMARY KEY (player_email, game_id),
-  FOREIGN KEY (player_email) REFERENCES player (email),
-  FOREIGN KEY (game_id) REFERENCES gamematch (id)
+  player_email REFERENCES player (email),
+  game_id REFERENCES gamematch (id)
 );
