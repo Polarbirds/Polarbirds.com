@@ -23,10 +23,15 @@ def show_entries():
 
 @app.route('/add', methods=['POST'])
 def add_entry():
-    g.db.execute('INSERT INTO player (email, password, name, joined) VALUES (?, ?, ?, ?)',
-                 [request.form['email'], 'badpw', request.form['name'], '1995-12-12 12:55'])
-    g.db.commit()
-    flash('New entry was successfully posted')
+    name = request.form['name']
+    email = request.form['email']
+    if email and name:
+        g.db.execute('INSERT INTO player (email, password, name, joined) VALUES (?, ?, ?, ?)',
+                     [email, 'badpw', name, '1995-12-12 12:55'])
+        g.db.commit()
+        flash('New entry was successfully posted')
+    else:
+        flash('Please fill both fields')
     return redirect(url_for('show_entries'))
 
 
