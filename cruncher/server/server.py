@@ -29,9 +29,11 @@ def show_player(playername):
     cur = g.db.execute('SELECT username FROM player')
     if not cur.fetchall():
         return render_template('playerprofile/404.html')
-    cur = g.db.execute('SELECT username FROM player WHERE username IS (?)', [playername])
-    entries = [dict(email=row[0]) for row in cur.fetchall()]
-    return render_template('playerprofile/profile.html', entries=entries)
+    stats = {
+        'name': playername
+    }
+    cur = g.db.execute('SELECT COUNT(gamematch.id) FROM gamematch WHERE username IS (?)', [playername])
+    return render_template('playerprofile/profile.html', entries=stats)
 
 @app.route('/add', methods=['POST'])
 def add_entry():

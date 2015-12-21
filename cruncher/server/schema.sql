@@ -30,9 +30,10 @@ CREATE TABLE stat (
 );
 
 CREATE TABLE player (
-  username    TEXT PRIMARY KEY NOT NULL,
-  email TEXT             NOT NULL,
-  joined   DATE             NOT NULL
+  id       INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  email    TEXT        NOT NULL,
+  joined   DATE        NOT NULL
 );
 
 CREATE TABLE gamedef_stat (
