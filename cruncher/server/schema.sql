@@ -16,17 +16,20 @@ CREATE TABLE gamematch (
 );
 
 CREATE TABLE gamedef (
-  id   INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  name        TEXT NOT NULL,
+  description TEXT
 );
 
 CREATE TABLE stat (
-  id         INTEGER PRIMARY KEY AUTOINCREMENT,
-  statname   TEXT  NOT NULL,
-  startvalue FLOAT NOT NULL,
-  cap_low    FLOAT NOT NULL,
-  cap_top    FLOAT NOT NULL,
-  increment  FLOAT NOT NULL
+  id             INTEGER PRIMARY KEY AUTOINCREMENT,
+  partofgame REFERENCES gamedef (id),
+  statname       TEXT  NOT NULL,
+  startvalue     FLOAT NOT NULL,
+  cap_low        FLOAT NOT NULL,
+  cap_top        FLOAT NOT NULL,
+  increment      FLOAT NOT NULL,
+  largeincrement FLOAT NOT NULL
 );
 
 CREATE TABLE player (
@@ -34,12 +37,6 @@ CREATE TABLE player (
   username TEXT UNIQUE NOT NULL,
   email    TEXT        NOT NULL,
   joined   DATE        NOT NULL
-);
-
-CREATE TABLE gamedef_stat (
-  game_id REFERENCES gamedef (id),
-  stat_id REFERENCES stat (id),
-  PRIMARY KEY (game_id, stat_id)
 );
 
 CREATE TABLE game_winners (
