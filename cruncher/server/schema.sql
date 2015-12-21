@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS player_game_stat;
 DROP TABLE IF EXISTS player_game;
 DROP TABLE IF EXISTS game_winners;
 DROP TABLE IF EXISTS gamedef_stat;
@@ -29,24 +30,33 @@ CREATE TABLE stat (
 );
 
 CREATE TABLE player (
-  email    TEXT PRIMARY KEY NOT NULL,
-  password TEXT             NOT NULL, -- Temporary!!
-  name     TEXT             NOT NULL,
+  username    TEXT PRIMARY KEY NOT NULL,
+  email TEXT             NOT NULL,
   joined   DATE             NOT NULL
 );
 
 CREATE TABLE gamedef_stat (
   game_id REFERENCES gamedef (id),
   stat_id REFERENCES stat (id),
-  value FLOAT NOT NULL
+  PRIMARY KEY (game_id, stat_id)
 );
 
 CREATE TABLE game_winners (
-  winner_email REFERENCES player (email),
-  game_id REFERENCES gamematch (id)
+  winner_username REFERENCES player (username),
+  game_id REFERENCES gamematch (id),
+  PRIMARY KEY (winner_username, game_id)
 );
 
 CREATE TABLE player_game (
-  player_email REFERENCES player (email),
-  game_id REFERENCES gamematch (id)
+  player_username REFERENCES player (username),
+  game_id REFERENCES gamematch (id),
+  PRIMARY KEY (player_username, game_id)
+);
+
+CREATE TABLE player_game_stat (
+  player_username REFERENCES player (username),
+  game_id REFERENCES gamematch (id),
+  statname TEXT  NOT NULL,
+  number   FLOAT NOT NULL,
+  PRIMARY KEY (player_username, game_id, statname)
 );
