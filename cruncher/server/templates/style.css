@@ -1,6 +1,7 @@
 body {
     font-family: sans-serif;
     background: #eee;
+    align-content: center;
 }
 
 a, h1, h2 {

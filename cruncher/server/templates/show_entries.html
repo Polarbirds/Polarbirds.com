@@ -12,10 +12,9 @@
 <div id="players">
     <ul class=entries>
         {% for entry in entries %}
-        <li>name:{{ entry.name }}, email:{{ entry.email|safe }}, joined:{{
-            entry.joined }}
+        <li><a href="playerprofile/{{ entry.name }}">{{ entry.name }}</a>
             {% else %}
-        <li><em>Unbelievable. No entries here so far</em>
+        <li><em>No registered players.</em>
             {% endfor %}
     </ul>
 </div>

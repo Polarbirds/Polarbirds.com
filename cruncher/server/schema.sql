@@ -43,21 +43,21 @@ CREATE TABLE gamedef_stat (
 );
 
 CREATE TABLE game_winners (
-  winner_username REFERENCES player (username),
+  winner_id REFERENCES player (id),
   game_id REFERENCES gamematch (id),
-  PRIMARY KEY (winner_username, game_id)
+  PRIMARY KEY (winner_id, game_id)
 );
 
 CREATE TABLE player_game (
-  player_username REFERENCES player (username),
+  player_id REFERENCES player (id),
   game_id REFERENCES gamematch (id),
-  PRIMARY KEY (player_username, game_id)
+  PRIMARY KEY (player_id, game_id)
 );
 
 CREATE TABLE player_game_stat (
-  player_username REFERENCES player (username),
+  player_id REFERENCES player (id),
   game_id REFERENCES gamematch (id),
   statname TEXT  NOT NULL,
   number   FLOAT NOT NULL,
-  PRIMARY KEY (player_username, game_id, statname)
+  PRIMARY KEY (player_id, game_id, statname)
 );

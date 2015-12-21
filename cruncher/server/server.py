@@ -19,37 +19,44 @@ app.config.from_object(__name__)
 
 @app.route('/')
 def show_entries():
-    cur = g.db.execute('SELECT email, username, joined FROM player ORDER BY username DESC')
-    entries = [dict(email=row[0], name=row[1], joined=row[2]) for row in cur.fetchall()]
+    cur = g.db.execute(
+        'SELECT username FROM player ORDER BY username DESC')
+    entries = [dict(name=row[0]) for row in
+               cur.fetchall()]
     return render_template('show_entries.html', entries=entries)
 
 
 @app.route('/playerprofile/<playername>')
 def show_player(playername):
-    cur = g.db.execute('SELECT username FROM player')
-    if not cur.fetchall():
+    result = g.db.execute(
+        'SELECT id, joined FROM player WHERE username IS (?)',
+        [playername]).fetchall()
+    if not result:
         return render_template('playerprofile/404.html')
     stats = {
-        'name': playername
+        'name': playername,
+        'id': result[0][0],
+        'joined': result[0][1],
     }
-    cur = g.db.execute('SELECT COUNT(gamematch.id) FROM gamematch WHERE username IS (?)', [playername])
     return render_template('playerprofile/profile.html', entries=stats)
+
 
 @app.route('/add', methods=['POST'])
 def add_entry():
     name = request.form['name']
     email = request.form['email']
     if email and name:
-        addplayer(email, 'pw', name, time.strftime('%Y-%m-%d %H:%M'))
+        addplayer(email, name, time.strftime('%Y-%m-%d %H:%M'))
         flash('New entry was successfully posted')
     else:
         flash('Please fill both fields')
     return redirect(url_for('show_entries'))
 
 
-def addplayer(email, password, name, joined):
-    g.db.execute('INSERT INTO player (email, username, joined) VALUES (?, ?, ?, ?)',
-                 [email, password, name, joined])
+def addplayer(email, name, joined):
+    g.db.execute(
+        'INSERT INTO player (email, username, joined) VALUES (?, ?, ?)',
+        [email, name, joined])
     g.db.commit()
 
 
