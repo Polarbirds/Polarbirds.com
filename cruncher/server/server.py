@@ -1,6 +1,6 @@
-from model import getformula
-
 __author__ = 'haraldfw'
+
+from model import getformula
 
 import time
 import sqlite3
@@ -40,7 +40,7 @@ def show_gamelist():
 def getformulaname(formulaid):
     result = g.db.execute('SELECT name, id FROM formula WHERE id IS (?)',
                           [formulaid]).fetchall()
-    if result:
+    if result and result[0]:
         return result[0][0]
     return "NA"
 
@@ -73,7 +73,8 @@ def show_player(playername):
 def show_formulalist():
     result = g.db.execute(
         'SELECT name, description, id FROM formula').fetchall()
-    formulas = [dict(name=row[0], description=row[1], id=row[2],
+    formulas = [dict(name=row[0], description=(row[1] if len(row[1]) < 75 else
+                                               (row[1][:72]+'...')), id=row[2],
                      statcount=getstatcount(row[2])) for row in result]
     return render_template('formula/list/list.html', formulas=formulas)
 
@@ -81,7 +82,7 @@ def show_formulalist():
 @app.route('/formula/def/<formulaid>')
 def show_formula(formulaid):
     result = g.db.execute(
-        'SELECT * FROM formula WHERE id IS (?)',
+        'SELECT id, name, description FROM formula WHERE id IS (?)',
         [formulaid]).fetchall()
     if not result:
         return render_template('404.html')

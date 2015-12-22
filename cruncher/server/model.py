@@ -16,8 +16,8 @@ def getstat(row):
 
 def getformula(row, statrows):
     stats = []
-    for row in statrows:
-        stats.append(getstat(row))
+    for statrow in statrows:
+        stats.append(getstat(statrow))
     return {
         'id': row[0],
         'name': row[1],
