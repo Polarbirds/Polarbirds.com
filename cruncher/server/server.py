@@ -1,3 +1,5 @@
+from model import getformula
+
 __author__ = 'haraldfw'
 
 import time
@@ -40,16 +42,16 @@ def show_player(playername):
     return render_template('player/profile/profile.html', entries=stats)
 
 
-@app.route('/formula/<id>')
-def show_formula(id):
+@app.route('/formula/<formulaid>')
+def show_formula(formulaid):
     result = g.db.execute(
         'SELECT * FROM formula WHERE id IS (?)',
-        [id]).fetchall()
+        [formulaid]).fetchall()
     if not result:
         return render_template('404.html')
     statrows = g.db.execute('SELECT * FROM stat WHERE stat.partofgame IS (?)',
                             [result[0]]).fetchall()
-    formula = Formula(result, statrows)
+    formula = getformula(result, statrows)
     return render_template('player/profile/profile.html', entries=formula)
 
 
