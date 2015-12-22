@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <title>Cruncher</title>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-<div class=page>
+<link rel=stylesheet type=text/css
+      href="{{ url_for('static', filename='style.css') }}">
+<body>
+
+<div class="header">
     <h1>Cruncher</h1>
+    <a href="/">Home</a>
+    <a href="playerlist.html">Players</a>
+    <a href="gamelist.html">Games</a>
+    <a href="formulalist.html">Formulas</a>
+</div>
+<div class=page>
     {% for message in get_flashed_messages() %}
     <div class=flash>{{ message }}</div>
     {% endfor %}
     {% block body %}{% endblock %}
 </div>
+</body>

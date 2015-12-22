@@ -1,7 +1,6 @@
-import time
-
 __author__ = 'haraldfw'
 
+import time
 import sqlite3
 
 from flask import Flask, jsonify, make_response, request, redirect
@@ -32,13 +31,26 @@ def show_player(playername):
         'SELECT id, joined FROM player WHERE username IS (?)',
         [playername]).fetchall()
     if not result:
-        return render_template('playerprofile/404.html')
+        return render_template('404.html')
     stats = {
         'name': playername,
         'id': result[0][0],
         'joined': result[0][1],
     }
-    return render_template('playerprofile/profile.html', entries=stats)
+    return render_template('player/profile/profile.html', entries=stats)
+
+
+@app.route('/formula/<id>')
+def show_formula(id):
+    result = g.db.execute(
+        'SELECT * FROM formula WHERE id IS (?)',
+        [id]).fetchall()
+    if not result:
+        return render_template('404.html')
+    statrows = g.db.execute('SELECT * FROM stat WHERE stat.partofgame IS (?)',
+                            [result[0]]).fetchall()
+    formula = Formula(result, statrows)
+    return render_template('player/profile/profile.html', entries=formula)
 
 
 @app.route('/add', methods=['POST'])
@@ -62,7 +74,7 @@ def addplayer(email, name, joined):
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
+    return render_template('404.html'), 404
 
 
 def connect_db():
