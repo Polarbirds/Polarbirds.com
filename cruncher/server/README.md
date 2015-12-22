@@ -1,1 +1,1 @@
-This is the server-backend of the app.
+This is the server-backend of the Cruncher-app.
