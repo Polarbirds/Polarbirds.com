@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+<div>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Formula</td>
+            <td>Time started</td>
+            <td>Time ended</td>
+        </tr>
+        {% for game in games %}
+        <tr>
+            <td><a href="match/{{ game.id }}">{{ game.id }}</a></td>
+            <td><a href="/formula/def/{{ game.formulaid }}">{{ game.formulaname }}</a></td>
+            <td>{{ game.timestarted }}</td>
+            <td>{{ game.timeended }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

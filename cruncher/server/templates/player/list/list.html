@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+<div id="players">
+    <ul class=entries>
+        {% for entry in entries %}
+        <li><a href="/player/profile/{{ entry.name }}">{{ entry.name }}</a>
+            {% else %}
+        <li><em>No registered players.</em>
+            {% endfor %}
+    </ul>
+</div>
+{% endblock %}

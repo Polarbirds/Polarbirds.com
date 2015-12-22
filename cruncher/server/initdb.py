@@ -11,11 +11,15 @@ def addtestdata(db):
     addplayer(db, 'Kristian', 'krishna@derp.com', '2000-06-18 15:15')
 
     addformula(db, 'Munchkin', 'Game definition for the game munchkin')
-
     addstat(db, 1, 'Level', 1, 1, 10, 1, 2)
-    addstat(db, 1, 'Combat', 1, -11000, 1000, 1, 10)
+    addstat(db, 1, 'Combat', 1, -1000, 1000, 1, 10)
 
-    addgame(db, 1, '2015-04-04 22:23', None, None)
+    addformula(db, 'Epic munchkin', 'The epic version of the game munchkin')
+    addstat(db, 2, 'Level', 1, 1, 20, 1, 5)
+    addstat(db, 2, 'Combat', 1, -1000, 1000, 1, 10)
+    addstat(db, 2, 'Gear', 1, 0, 1000, 1, 10)
+
+    addgame(db, 1, '2015-04-04 23:24', '2015-04-05 04:02', 'She won')
     addgame(db, 1, '2015-04-04 22:23', '2015-04-05 02:45', 'He won')
 
     addplayertogame(db, 2, 1)

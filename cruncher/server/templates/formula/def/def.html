@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+<div>
+    <ul>
+        <li>Id: {{ formula.id }}
+        <li>Name: {{ formula.name }}
+        <li>Description: {{ formula.description }}
+    </ul>
+    <p>Stats:</p>
+    <ul>
+        {% for stat in formula.stats %}
+        <li><p><b>{{ stat.statname }}</b></p>
+        <li>formula id: {{ stat.partofgame }}
+        <li>id: {{ stat.id }}
+        <li>startvalue: {{ stat.startvalue }}
+        <li>cap low: {{ stat.cap_low }}
+        <li>cap top: {{ stat.cap_top }}
+        <li>increment: {{ stat.increment }}
+        <li>large increment: {{ stat.largeincrement }}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

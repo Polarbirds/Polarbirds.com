@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+<div>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Stats</td>
+            <td>Description</td>
+        </tr>
+        {% for formula in formulas %}
+        <tr>
+            <td><a href="def/{{ formula.id }}">{{ formula.name }}</a></td>
+            <td>{{ formula.statcount }}</td>
+            <td>{{ formula.description }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
