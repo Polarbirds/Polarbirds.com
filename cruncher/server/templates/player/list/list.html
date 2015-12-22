@@ -1,12 +1,21 @@
 {% extends "layout.html" %}
 {% block body %}
 <div id="players">
-    <ul class=entries>
-        {% for entry in entries %}
-        <li><a href="/player/profile/{{ entry.name }}">{{ entry.name }}</a>
-            {% else %}
-        <li><em>No registered players.</em>
-            {% endfor %}
-    </ul>
+    <table>
+        <tr class="thead">
+            <td>Name</td>
+            <td>Games</td>
+            <td>Wins</td>
+            <td>Win%</td>
+        </tr>
+        {% for p in players %}
+        <tr>
+            <td><a href="/player/profile/{{ p.name }}">{{ p.name }}</a></td>
+            <td>{{ p.games }}</td>
+            <td>{{ p.wins }}</td>
+            <td>{{ p.winpercentage }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
 {% endblock %}

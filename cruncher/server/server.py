@@ -48,10 +48,29 @@ def getformulaname(formulaid):
 @app.route('/player/list')
 def show_playerlist():
     cur = g.db.execute(
-        'SELECT username FROM player ORDER BY username DESC')
-    entries = [dict(name=row[0]) for row in
-               cur.fetchall()]
-    return render_template('player/list/list.html', entries=entries)
+        'SELECT username, id FROM player ORDER BY username DESC')
+    players = []
+    for row in cur.fetchall():
+        games = getgames(row[1])
+        wins = getwins(row[1])
+        players.append({
+            'name': row[0],
+            'games': games,
+            'wins': wins,
+            'winpercentage': str(round((float(wins) / float(games)) * 100, 1)) + '%'
+            if games > 0 else 0
+        })
+    return render_template('player/list/list.html', players=players)
+
+
+def getgames(playerid):
+    return len(g.db.execute('SELECT player_id FROM player_game '
+                            'WHERE player_id = (?)', [playerid]).fetchall())
+
+
+def getwins(playerid):
+    return len(g.db.execute('SELECT winner_id FROM game_winners '
+                            'WHERE winner_id = (?)', [playerid]).fetchall())
 
 
 @app.route('/player/profile/<playername>')
@@ -74,7 +93,8 @@ def show_formulalist():
     result = g.db.execute(
         'SELECT name, description, id FROM formula').fetchall()
     formulas = [dict(name=row[0], description=(row[1] if len(row[1]) < 75 else
-                                               (row[1][:72]+'...')), id=row[2],
+                                               (row[1][:72] + '...')),
+                     id=row[2],
                      statcount=getstatcount(row[2])) for row in result]
     return render_template('formula/list/list.html', formulas=formulas)
 

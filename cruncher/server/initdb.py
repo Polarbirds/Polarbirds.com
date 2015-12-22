@@ -21,10 +21,23 @@ def addtestdata(db):
 
     addgame(db, 1, '2015-04-04 23:24', '2015-04-05 04:02', 'She won')
     addgame(db, 1, '2015-04-04 22:23', '2015-04-05 02:45', 'He won')
+    addgame(db, 1, '2015-04-04 22:23', '2015-04-05 02:45', 'He won')
 
     addplayertogame(db, 2, 1)
-
+    addplayertogame(db, 1, 1)
     addwinner(db, 2, 1)
+
+    addplayertogame(db, 2, 2)
+    addplayertogame(db, 1, 2)
+    addwinner(db, 1, 2)
+
+    addplayertogame(db, 1, 3)
+    addplayertogame(db, 2, 3)
+    addplayertogame(db, 3, 3)
+    addplayertogame(db, 4, 3)
+    addwinner(db, 1, 3)
+
+
 
 
 def addwinner(db, winner_id, game_id):
