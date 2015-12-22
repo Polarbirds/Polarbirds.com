@@ -10,7 +10,7 @@ def addtestdata(db):
     addplayer(db, 'Trym', 'trymrt@tihlde.org', '2009-04-20 01:40')
     addplayer(db, 'Kristian', 'krishna@derp.com', '2000-06-18 15:15')
 
-    addformula(db, 'Munchkin', 'Game defenition for the game munchkin')
+    addformula(db, 'Munchkin', 'Game definition for the game munchkin')
 
     addstat(db, 1, 'Level', 1, 1, 10, 1, 2)
     addstat(db, 1, 'Combat', 1, -11000, 1000, 1, 10)
