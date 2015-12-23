@@ -1,14 +1,14 @@
 __author__ = 'haraldfw'
 
-from model import getformula
-
 import time
 import sqlite3
 
-from flask import Flask, jsonify, make_response, request, redirect
+from flask import Flask, request, redirect
 from flask.globals import g
 from flask.helpers import url_for, flash
 from flask.templating import render_template
+
+from model import getformula
 
 DATABASE = 'cruncher.db'
 DEBUG = True
@@ -20,11 +20,31 @@ app.config.from_object(__name__)
 
 @app.route('/')
 def show_entries():
-    cur = g.db.execute(
-        'SELECT username FROM player ORDER BY username DESC')
-    entries = [dict(name=row[0]) for row in
-               cur.fetchall()]
-    return render_template('show_entries.html', entries=entries)
+    games = g.db.execute('SELECT id, formula_id, timeended FROM game '
+                         'ORDER BY timeended DESC LIMIT 5').fetchall()
+    recentgames = []
+    for row in games:
+        formulaname = g.db.execute(
+            'SELECT name, id FROM formula WHERE id = (?)',
+            [row[1]]).fetchall()[0][0]
+        recentgames.append({
+            'id': row[0],
+            'formulaid': row[1],
+            'formulaname': formulaname,
+            'timeended': row[2]
+        })
+    formulas = g.db.execute('SELECT id, name FROM formula').fetchall()
+    topformulas = []
+    for row in formulas:
+        topformulas.append({
+            'id': row[0],
+            'name': row[1],
+            'uses': len(g.db.execute('SELECT formula_id FROM game WHERE '
+                                     'formula_id = (?)', [row[0]]).fetchall())
+        })
+    topformulas = sorted(topformulas, key=lambda k: k['uses'], reverse=True)[:5]
+    return render_template('home.html', recentgames=recentgames,
+                           topformulas=topformulas)
 
 
 @app.route('/game/list')
@@ -57,7 +77,8 @@ def show_playerlist():
             'name': row[0],
             'games': games,
             'wins': wins,
-            'winpercentage': str(round((float(wins) / float(games)) * 100, 1)) + '%'
+            'winpercentage': str(
+                round((float(wins) / float(games)) * 100, 1)) + '%'
             if games > 0 else 0
         })
     return render_template('player/list/list.html', players=players)

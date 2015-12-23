@@ -19,9 +19,22 @@ def addtestdata(db):
     addstat(db, 2, 'Combat', 1, -1000, 1000, 1, 10)
     addstat(db, 2, 'Gear', 1, 0, 1000, 1, 10)
 
+    addformula(db, 'Another munchkin', 'Lel')
+    addformula(db, 'Another munchkin again', 'Lel... again')
+    addformula(db, 'Another munchkin again', 'Lel... again')
+    addformula(db, 'Another munchkin again', 'Lel... again')
+    addformula(db, 'Another munchkin again', 'Lel... again')
+    addformula(db, 'Another munchkin again', 'Lel... again')
+
     addgame(db, 1, '2015-04-04 23:24', '2015-04-05 04:02', 'She won')
     addgame(db, 1, '2015-04-04 22:23', '2015-04-05 02:45', 'He won')
     addgame(db, 1, '2015-04-04 22:23', '2015-04-05 02:45', 'He won')
+    addgame(db, 3, '2015-04-04 22:23', '2015-12-12 09:13', 'He won')
+
+    addgame(db, 2, '2015-04-04 23:24', '2015-04-05 04:02', 'She won')
+    addgame(db, 2, '2015-04-04 22:23', '2015-04-05 02:45', 'He won')
+    addgame(db, 3, '2015-04-04 22:23', '2015-04-05 02:45', 'He won')
+    addgame(db, 4, '2015-04-04 22:23', '2015-12-12 09:13', 'He won')
 
     addplayertogame(db, 2, 1)
     addplayertogame(db, 1, 1)
