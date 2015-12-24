@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="box">
+    <h2>Recent games</h2>
+    <table>
+        <tr class="thead">
+            <td>Id</td>
+            <td>Formula</td>
+            <td>Ended</td>
+        </tr>
+        {% for g in recentgames %}
+        <tr>
+            <td><a href="/game/match/{{ g.id }}">{{ g.id }}</a></td>
+            <td><a href="/formula/def/{{ g.formulaid }}">{{ g.formulaname }}</a></td>
+            <td>{{ g.timeended }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="box">
+    <h2>Top formulas</h2>
+    <table>
+        <tr class="thead">
+            <td>Name</td>
+            <td>Uses</td>
+        </tr>
+        {% for f in topformulas %}
+        <tr>
+            <td><a href="/formula/def/{{ f.id }}">{{ f.name }}</a></td>
+            <td>{{ f.uses }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
