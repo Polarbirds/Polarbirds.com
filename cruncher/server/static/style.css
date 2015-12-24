@@ -1,0 +1,132 @@
+body {
+    font-family: sans-serif;
+    background: #eee;
+    align-content: center;
+}
+
+a, h1, h2 {
+    color: #377ba8;
+}
+
+h1, h2 {
+    font-family: 'Lucida Grande', sans-serif;
+    line-height: 150%;
+    margin: 0;
+}
+
+h1 {
+    border-bottom: 2px solid #eee;
+}
+
+h2 {
+    font-size: 1.2em;
+}
+
+.page {
+    margin: 2em auto;
+    width: 35em;
+    border: 5px solid #ccc;
+    padding: 0.8em;
+    background: white;
+}
+
+.header {
+    margin: 2em auto;
+    background: #fafafa;
+    padding: 1em;
+}
+
+#players {
+
+}
+
+.entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.entries li {
+    margin: 0.8em 1.2em;
+}
+
+.entries li h2 {
+    margin-left: -1em;
+}
+
+.add-entry {
+    font-size: 0.9em;
+    border-bottom: 1px solid #ccc;
+}
+
+.add-entry dl {
+    font-weight: bold;
+}
+
+.metanav {
+    text-align: right;
+    font-size: 0.8em;
+    padding: 0.3em;
+    margin-bottom: 1em;
+    background: #fafafa;
+}
+
+.flash {
+    background: #cee5F5;
+    padding: 0.5em;
+    border: 1px solid #aacbe2;
+}
+
+.error {
+    background: #f0d6d6;
+    padding: 0.5em;
+}
+
+a {
+    color: #377ba8;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3479a5;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.box {
+
+}
+
+table {
+    max-width: 100%;
+    background-color: transparent;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0.2em;
+    border-color: grey;
+    width: 100%;
+}
+
+tr {
+    border-collapse: collapse;
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+    line-height: 1.8em;
+}
+
+.thead {
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid #d0d0d0;
+    border-collapse: collapse;
+    padding: 0.25em 0.25em 0.25em 0.5em;
+    vertical-align: middle;
+}
+
+tr:nth-child(even) {
+    background-color: #eaeaea;
+}
