@@ -16,7 +16,6 @@ SECRET_KEY = 'devkey'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-app.config["APPLICATION_ROOT"] = "cruncher/"
 
 @app.route('/')
 def show_entries():
